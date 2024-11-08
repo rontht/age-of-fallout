@@ -64,8 +64,8 @@ class Game {
     }
 
     setup() {
-        spawn_game_buttons();
         spawn_sprites();
+        spawn_game_buttons();
 
         world.gravity.y = 20;
     }
@@ -85,25 +85,45 @@ class Game {
 
         // test rect for scrolling
         fill("red");
-        rect(0, 50, 1000, 100);
+        rect(0, 50, 1000, 10);
         fill("yellow");
-        rect(1000, 50, 1000, 100);
+        rect(1000, 50, 1000, 10);
         fill("green");
-        rect(2000, 50, 1000, 100);
+        rect(2000, 50, 1000, 10);
+
+        textSize(12);
+        fill('black');
+        text("Caps: " + base.caps, 10, 150 -20);
+        text("Scraps: " + base.scraps, 10, 150);
+        text("Empty: " + this.count_rooms(0), 10, 150 + 20);
+        text("Armory: " + this.count_rooms(1), 10, 150 + 40);
+        text("Lab: " + this.count_rooms(2), 10, 150 + 60);
+        text("Bunker: " + this.count_rooms(3), 10, 150 + 80);
 
         // Update and draw sprites based on the adjusted camera position
         apply_scrolling_to_sprites(ground);
         apply_scrolling_to_sprites(door);
         apply_scrolling_to_sprites(wall);
         apply_scrolling_to_sprites(unit);
+        apply_scrolling_to_sprites(base);
 
         for (let button of game_buttons) {
             apply_scrolling_to_sprites(button);
         }
-    
-        for (let object of base) {
-            apply_scrolling_to_sprites(object);
+
+        for (let room of rooms) {
+            apply_scrolling_to_sprites(room);
         }
+    }
+
+    count_rooms(id) {
+        let count = 0;
+        rooms.forEach(room => {
+            if (room.room_type === id) {
+                count++;
+            }
+        });
+        return count;
     }
 }
 
@@ -127,5 +147,6 @@ class Config {
         textSize(30);
         fill('black');
         text('Menu', 30, 50);
+        textSize(12);
     }
 }

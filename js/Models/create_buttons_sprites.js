@@ -1,41 +1,53 @@
 let trayY = 500;
-let tray_height = 300;
-let tray_target = 600;
+let tray_height = 360;
+let tray_target = 560;
 
 function spawn_game_buttons() {
     // button configs
     let button_width = 100;
     let button_height = 30;
+    let buttons_x = 15;
 
     // create new group for game buttons
     // should make this into factory _______________________________
     game_buttons = new Group();
 
-    build_buttons_bg = factory.createBackground(700, 500, 500, 1, true);
+
+
+    build_buttons_bg = factory.createBackground(700 + buttons_x, 500, 500, 1, true);
     game_buttons.add(build_buttons_bg);
     
     build_room_1 = new Sprite();
     game_buttons.add(build_room_1);
-    apply_button_style(build_room_1, 600, trayY, button_width * 2, button_height, "Armory");
+    apply_button_style(build_room_1, 485 + buttons_x, trayY, 50, 50, "Arm");
     
     build_room_2 = new Sprite();
     game_buttons.add(build_room_2);
-    apply_button_style(build_room_2, 600, trayY + 50, button_width * 2, button_height, "Lab");
+    apply_button_style(build_room_2, 485 + buttons_x, trayY + 50, 50, 50, "Lab");
     
     build_room_3 = new Sprite();
     game_buttons.add(build_room_3);
-    apply_button_style(build_room_3, 600, trayY + 100, button_width * 2, button_height, "Bunker");
+    apply_button_style(build_room_3, 485 + buttons_x, trayY + 100, 50, 50, "Bunk");
+
+    build_room_4 = new Sprite();
+    game_buttons.add(build_room_4);
+    apply_button_style(build_room_4, 485 + buttons_x, trayY + 150, 50, 50, "New");
     
-    main_buttons_bg = factory.createBackground(700, 500, 500, 50, true);
+    main_buttons_bg = factory.createBackground(700 + buttons_x, 500, 500, 50, true);
     game_buttons.add(main_buttons_bg);
     
     toggle_button = new Sprite();
     game_buttons.add(toggle_button);
-    apply_button_style(toggle_button, 550, 500, button_width, button_height, "Build");
+    apply_button_style(toggle_button, 650 + buttons_x, 500, 400, 50, "Build");
 
     salvage_button = new Sprite();
     game_buttons.add(salvage_button);
-    apply_button_style(salvage_button, 650, 500, button_width, button_height, "Salvage");
+    apply_button_style(salvage_button, 900 + buttons_x, 500, 100, 50, "Salvage");
+
+
+    info_panel = factory.createInfo();
+    // game_buttons.add(info);
+
 
 
 

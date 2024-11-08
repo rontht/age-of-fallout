@@ -1,4 +1,4 @@
-let tray_opened = false;
+let tray_opened = true;
 let tray_speed = 8;
 
 function bind_game_button_events() {
@@ -14,6 +14,7 @@ function bind_game_button_events() {
         wall.remove();
         door.remove();
         base.remove();
+        rooms.remove();
         unit.remove();
         game_buttons.remove();
         game_menu_buttons.remove();
@@ -71,7 +72,7 @@ function bind_game_button_events() {
 
 function dropdown_build_buttons() {
     // Dropdown
-    let build_buttons = [build_room_1, build_room_2, build_room_3]
+    let build_buttons = [build_room_1, build_room_2, build_room_3, build_room_4]
     if (toggle_button.mouse.presses()) {
         if (tray_opened) {
             tray_opened = false;
@@ -85,7 +86,7 @@ function dropdown_build_buttons() {
         trayY = lerp(trayY, tray_target, 0.1);
         // update buttons position
         build_buttons.forEach((btn, i) => {
-            btn.position.y = trayY + i * 50;
+            btn.position.y = trayY + i * 70;
         });
     } else {
         trayY = lerp(trayY, 500, 0.1);
@@ -97,7 +98,7 @@ function dropdown_build_buttons() {
 
     if (tray_opened) {
         build_buttons_bg.h = lerp(build_buttons_bg.h, tray_height, 0.1); // Grow background
-        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 2.2, 0.1); // Grow background
+        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 1.8, 0.1); // Grow background
     } else {
         build_buttons_bg.h = lerp(build_buttons_bg.h, 1, 0.1); // Shrink background
         build_buttons_bg.y = lerp(build_buttons_bg.y, 520, 0.1); // Shrink background
@@ -108,6 +109,12 @@ function dropdown_build_buttons() {
         build_buttons.forEach((btn, i) => {
             btn.collider = 'n';
         });
+    }
+
+    if (build_buttons_bg.h > tray_height -10) {
+        info_panel.visible = true;
+    } else {
+        info_panel.visible = false;
     }
 }
 

@@ -57,6 +57,9 @@ class Factory {
         }
         object.collider = 's';
 
+        object.caps = 100;
+        object.scraps = 1000;
+
         return object;
     }
 
@@ -96,6 +99,9 @@ class Factory {
         object.room_type = 0;
         object.collider = 's';
 
+        object.cap_cost = 0;
+        object.scrap_cost = 0;
+
         return object;
     }
 
@@ -132,6 +138,33 @@ class Factory {
         object.color = "gray";
         object.collider = 'n';
         object.visible = visible;
+        return object;
+    }
+
+    createInfo() {
+        let object = new Sprite(715, 650);
+        object.w = 400;
+        object.h = 340;
+        object.draw = () => {
+            // fill(0, 255, 0, 100);
+            // rect(0, -5, object.w, object.h);
+
+            fill('black');
+            textSize(15);
+            text('Caps cost: ' + 20, -180, -95);
+            text('Scraps cost: ' + 100, -180, -75);
+
+            text('Caps cost: ' + 20, -180, -95 + 70);
+            text('Scraps cost: ' + 100, -180, -75 + 70);
+            
+            text('Caps cost: ' + 20, -180, -95 + 140);
+            text('Scraps cost: ' + 100, -180, -75 + 140);
+
+            text('Caps cost: ' + 20, -180, -95 + 210);
+            text('Scraps cost: ' + 100, -180, -75 + 210);
+        }
+        object.collider = 'n';
+        object.visible = false;
         return object;
     }
 
