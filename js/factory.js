@@ -192,15 +192,21 @@ class Factory {
             rect(0, -5, object.w, object.h);
 
             if (build_buttons_bg.h > tray_height -50) {
-                fill('black');
+
                 textSize(15);
+                this.change_colors(armory_c_cost, base.caps);
                 text('Caps cost: ' + armory_c_cost, -180, -105);
+                this.change_colors(armory_s_cost, base.scraps);
                 text('Scraps cost: ' + armory_s_cost, -180, -85);
-    
+                
+                this.change_colors(lab_c_cost, base.caps);
                 text('Caps cost: ' + lab_c_cost, -180, -105 + 70);
+                this.change_colors(lab_s_cost, base.scraps);
                 text('Scraps cost: ' + lab_s_cost, -180, -85 + 70);
                 
+                this.change_colors(bunker_c_cost, base.caps);
                 text('Caps cost: ' + bunker_c_cost, -180, -105 + 140);
+                this.change_colors(bunker_s_cost, base.scraps);
                 text('Scraps cost: ' + bunker_s_cost, -180, -85 + 140);
     
                 text('Caps cost: ' + 20, -180, -105 + 210);
@@ -243,5 +249,13 @@ class Factory {
             dim_step = -dim_step;
         }
         return dim;
+    }
+
+    change_colors(cost, resource) {
+        if (cost <= resource) {
+            fill('black');
+        } else {
+            fill('red');
+        }
     }
 }

@@ -11,11 +11,7 @@ function modifying_rooms() {
     for (let room of rooms) {
         // Building new rooms
         if (build_mode) {
-            if (room.mouse.presses() && kb.pressing('SHIFT')) {
-                if (room.room_type === 0) {
-                    build_room(room, base);
-                }
-            } else if (room.mouse.presses()) {
+            if (room.mouse.presses()) {
                 if (room.room_type === 0) {
                     build_room(room, base);
                     build_mode = false;
@@ -25,11 +21,7 @@ function modifying_rooms() {
 
         // Selling rooms
         if (salvage_mode) {
-            if (room.mouse.presses() && kb.pressing('SHIFT')) {
-                if (room.room_type != 0) {
-                    room.room_type = 0;
-                }
-            } else if (room.mouse.presses()) {
+            if (room.mouse.presses()) {
                 if (room.room_type != 0) {
                     room.room_type = 0;
                     salvage_mode = false;

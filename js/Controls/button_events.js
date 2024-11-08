@@ -120,13 +120,6 @@ function dropdown_build_buttons() {
             btn.collider = 'n';
         });
     }
-
-
-        // info_panel.visible = true;
-    // } else {
-        // info_panel.visible = false;
-        // console.log('no');
-    // }
 }
 
 function bind_menu_button_events() {
