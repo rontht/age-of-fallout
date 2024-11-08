@@ -1,3 +1,5 @@
+let lastTime = 0;
+
 function spawn_sprites() {
     // Ground
     ground = factory.createGround();
@@ -45,4 +47,17 @@ function spawn_sprites() {
 
     enemy_bases = new Group();
     enemy_bases.push(factory.createEnemySpawn(1000, 400));
+}
+
+function spawn_enemy() {
+    let currentTime = millis();
+
+    // Check if 60 seconds (60,000 ms) have passed since the last sprite was created
+    if (currentTime - lastTime >= 1000) {
+
+        //enemy_bases.push(factory.createEnemySpawn(3000, 400));
+
+        // Update lastTime to the current time
+        lastTime = currentTime;
+    }
 }

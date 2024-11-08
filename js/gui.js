@@ -71,8 +71,8 @@ class Game {
     }
 
     draw() {
+        spawn_enemy();
         background('#7ec1cf');
-
         // add button functions
         enable_buttons(game_buttons);
         enable_buttons(game_menu_buttons);
