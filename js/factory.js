@@ -63,6 +63,51 @@ class Factory {
         return object;
     }
 
+    createBase2() {
+        let object = new Sprite(210, 595);
+        // visual
+        object.draw = () => {
+            tint(255, 150);
+            let imageW = 100;
+            let imageH = 99;
+            let startX = 3950;
+            let startY = -98
+            for(let row = 0; row < 4; row++){
+                for(let col = 0; col < 4; col++){
+                image(this.wall, startX + col * imageW, startY + row * imageH, 100, 90);
+                }
+            }
+
+            //image(this.wall, 1000, 0, 100, 90);
+            strokeWeight(0);
+            fill('#1f1f1f');
+            // walls
+            rect(4280, 0, 20, 520); // left wall
+            rect(3890, 55, 20, 420); // right wall
+            rect(4100, -250, 440, 20); // top wall
+
+            // floors
+            rect(4100, -150, 400, 10);
+            rect(4100, -50, 400, 10);
+            rect(4100, 50, 400, 10);
+            rect(4100, 150, 400, 10);
+            rect(4100, 250, 400, 10);
+        }
+        object.collider = 's';
+
+        object.caps = 100;
+        object.scraps = 1000;
+
+        return object;
+    }
+
+    createEnemySpawn(x, y){
+        let object = new Sprite(x, y);
+        object.w = 100;
+        object.h = 50;
+        return object;
+    }
+
     createRoom(x, y) {
         let object = new Sprite(x, y);
         object.w = 100;

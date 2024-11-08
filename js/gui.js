@@ -107,6 +107,14 @@ class Game {
         apply_scrolling_to_sprites(unit);
         apply_scrolling_to_sprites(base);
 
+
+        for (let enemy_bases of enemy_bases) {
+            apply_scrolling_to_sprites(enemy_bases);
+        }
+
+        //apply_scrolling_to_sprites(base2);
+        //apply_scrolling_to_sprites(door2);
+
         for (let button of game_buttons) {
             apply_scrolling_to_sprites(button);
         }

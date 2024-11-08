@@ -4,10 +4,13 @@ function spawn_sprites() {
 
     // Door
     door = factory.createDoor(430, 400);
+    //door2 = factory.createDoor(1500, 400);
+    
     wall = factory.createDoor(14, 400);
 
     // Base
     base = factory.createBase();
+    //base2 = factory.createBase2();
 
     // Rooms
     rooms = new Group();
@@ -41,6 +44,5 @@ function spawn_sprites() {
     ///////////
 
     enemy_bases = new Group();
-    
-
+    enemy_bases.push(factory.createEnemySpawn(1000, 400));
 }
