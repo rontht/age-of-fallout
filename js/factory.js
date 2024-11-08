@@ -227,6 +227,99 @@ class Factory {
         return object;
     }
 
+    //______ Function to mass apply stats ______//
+    apply_default_stats(object, health, armor, damage, attack_speed, attack_range, search_range, movement_speed) {
+        // target finding stats
+        object.default_search_range = search_range; // hold default search range (should not be changed)
+        object.current_search_range = search_range; // hold current search range (can be changed)
+        //object.target_node = null;
+        //object.target_node_distance = Infinity;
+        object.target_enemy = null;
+        object.target_enemy_distance = Infinity;
+
+        // unit stats
+        object.type = 2;                        // unit type (will always be 2 for units)
+        object.health = health;                 // hit point / health
+        object.armor = armor;                   // armor (reduce incoming damage)
+        object.damage = damage;                 // damage (damage done per attack)
+        object.last_attack = null;              // attack timer
+        object.attack_speed = attack_speed;     // attack speed (attacks per second)
+        //object.attack_range = attack_range;     // attack range (50 minimum especially melee units)
+        object.movement_speed = movement_speed; // speed (normal should be 1)
+    }
+
+
+    /////////////
+    ///Enemies///
+    /////////////
+    
+    enemy_type_z(x, y){
+        let object = new Sprite(x, y);
+            // Visual Config
+            // object.img = this.generic_sword_guy;
+            //object.color = red;
+            object.w = 20;
+            object.h = 50;
+            object.collider = 'd';
+            object.immovable = true;
+            object.rotationLock = true;
+            object.draw = () => {
+            strokeWeight(0)
+            //fill(color);
+            //ellipse(0, 0, 20, 20);
+            textSize(10);
+            fill('white');
+            text(object.health, -10, -10);
+            }
+            //object.debug = true;
+    
+            // Stats Config
+            this.apply_default_stats(
+            object, // object
+            80,    // health
+            0,      // armor
+            5,      // damage
+            1,      // attack_speed
+            //150,     // attack_range
+            150,    // search_range
+            1       // movement_speed
+            );
+                
+        return object;
+        }
+
+
+        enemy_type_d(x, y){
+            let object = new Sprite(x, y);
+                // Visual Config
+                // object.img = this.generic_sword_guy;
+                //object.color = red;
+                object.d = 20;
+                object.draw = () => {
+                strokeWeight(0)
+                //fill(color);
+                ellipse(0, 0, 20, 20);
+                textSize(10);
+                fill('white');
+                text(object.health, -10, -10);
+                }
+                //object.debug = true;
+        
+                // Stats Config
+                this.apply_default_stats(
+                object, // object
+                200,    // health
+                0,      // armor
+                5,      // damage
+                1,      // attack_speed
+                //150,     // attack_range
+                150,    // search_range
+                1       // movement_speed
+                );
+                    
+            return object;
+            }
+
 
 
     /////////////

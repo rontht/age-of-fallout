@@ -1,4 +1,9 @@
 let lastTime = 0;
+let z_enemy_count = 4;
+let d_enemy_count = 0;
+let enemy_limiter = 0;
+let initial_position = 1000;
+
 
 function spawn_sprites() {
     // Ground
@@ -51,13 +56,36 @@ function spawn_sprites() {
 
 function spawn_enemy() {
     let currentTime = millis();
+    //Max Spawn Logic
+    // Check for time passed.
+    if (currentTime - lastTime >= 10000) {
+    let total_spawn = z_enemy_count + d_enemy_count; // Total number of enemies to spawn
+    let max_spawn = 6;
 
-    // Check if 60 seconds (60,000 ms) have passed since the last sprite was created
-    if (currentTime - lastTime >= 1000) {
-
-        //enemy_bases.push(factory.createEnemySpawn(3000, 400));
-
-        // Update lastTime to the current time
-        lastTime = currentTime;
+    // Spawn enemies based on current counts and limits
+    for (let i = 0; i < total_spawn; i++) {
+        if (i < z_enemy_count) {
+        enemy_bases.push(factory.enemy_type_z(initial_position, 400));
+    } else {
+        enemy_bases.push(factory.enemy_type_d(initial_position, 400));
+        }
+      initial_position += 20; // Space out enemies
     }
+
+    // Adjust counters and spawn limit according to the pattern
+    if (z_enemy_count < 6 - enemy_limiter) {
+        z_enemy_count += 1;
+    } else if (d_enemy_count < max_spawn) {
+      // Only spawn 'd' enemies if there are less than 6 'd' enemies
+        d_enemy_count += 1;
+        z_enemy_count = 0; // Reset 'z' count after spawning 6 'z' enemies
+        enemy_limiter += 1; // Increase the limiter to reduce 'z' spawns in next cycles
+    }
+
+    enemy_bases.overlaps(enemy_bases);
+
+        lastTime = currentTime;
+        initial_position = 1000;
+    }
+    
 }
