@@ -26,6 +26,7 @@ class Factory {
         object.h = 10;
         object.color = 'black';
         object.collider = 's';
+        object.type = 'ENV';
         return object;
     }
 
@@ -56,6 +57,7 @@ class Factory {
             text('F4', -190, 165);
         }
         object.collider = 's';
+        object.type = 'ENV';
 
         object.caps = 100;
         object.scraps = 1000;
@@ -98,9 +100,7 @@ class Factory {
         }
         object.room_type = 0;
         object.collider = 's';
-
-        object.cap_cost = 0;
-        object.scrap_cost = 0;
+        object.type = 'ROM';
 
         return object;
     }
@@ -111,6 +111,7 @@ class Factory {
         object.h = 100;
         object.color = 'red';
         object.collider = 's';
+        object.type = 'DOR';
         // object.debug= true;
         return object;
     }
@@ -123,6 +124,7 @@ class Factory {
         object.immovable = true;
         object.rotationLock = true;
         object.friction = 0;
+        object.type = 'UNT';
         // object.debug= true;
         return object;
     }
@@ -138,33 +140,38 @@ class Factory {
         object.color = "gray";
         object.collider = 'n';
         object.visible = visible;
+        object.type = 'GUI';
         return object;
     }
 
-    createInfo() {
-        let object = new Sprite(715, 650);
-        object.w = 400;
-        object.h = 340;
+    createBackground2(x, y, w, h, visible) {
+        let object = new Sprite(x, y);
+        object.w = w;
+        object.h = h;
         object.draw = () => {
-            // fill(0, 255, 0, 100);
-            // rect(0, -5, object.w, object.h);
+            fill(0, 255, 0, 100);
+            rect(0, -5, object.w, object.h);
 
-            fill('black');
-            textSize(15);
-            text('Caps cost: ' + 20, -180, -95);
-            text('Scraps cost: ' + 100, -180, -75);
-
-            text('Caps cost: ' + 20, -180, -95 + 70);
-            text('Scraps cost: ' + 100, -180, -75 + 70);
-            
-            text('Caps cost: ' + 20, -180, -95 + 140);
-            text('Scraps cost: ' + 100, -180, -75 + 140);
-
-            text('Caps cost: ' + 20, -180, -95 + 210);
-            text('Scraps cost: ' + 100, -180, -75 + 210);
+            if (build_buttons_bg.h > tray_height -50) {
+                fill('black');
+                textSize(15);
+                text('Caps cost: ' + armory_c_cost, -180, -105);
+                text('Scraps cost: ' + armory_s_cost, -180, -85);
+    
+                text('Caps cost: ' + lab_c_cost, -180, -105 + 70);
+                text('Scraps cost: ' + lab_s_cost, -180, -85 + 70);
+                
+                text('Caps cost: ' + bunker_c_cost, -180, -105 + 140);
+                text('Scraps cost: ' + bunker_s_cost, -180, -85 + 140);
+    
+                text('Caps cost: ' + 20, -180, -105 + 210);
+                text('Scraps cost: ' + 100, -180, -85 + 210);
+            }
         }
+        object.color = "gray";
         object.collider = 'n';
-        object.visible = false;
+        object.visible = visible;
+        object.type = 'GUI';
         return object;
     }
 

@@ -18,6 +18,7 @@ function bind_game_button_events() {
         unit.remove();
         game_buttons.remove();
         game_menu_buttons.remove();
+        info_panel.remove();
     }
 
     if (game_config_button.mouse.presses()) {
@@ -27,21 +28,36 @@ function bind_game_button_events() {
     }
 
     if (build_room_1.mouse.presses()) {
-        build_mode = true;
-        salvage_mode = false;
-        build_room_type = 1;
+        if (armory_s_cost <= base.scraps && armory_c_cost <= base.caps) {
+            console.log("ready to build armory");
+            build_mode = true;
+            salvage_mode = false;
+            build_room_type = 1;
+        } else {
+            console.log("not enough resources to build armory");
+        }
     }
 
     if (build_room_2.mouse.presses()) {
-        build_mode = true;
-        salvage_mode = false;
-        build_room_type = 2;
+        if (lab_s_cost <= base.scraps && lab_c_cost <= base.caps) {
+            console.log("ready to build lab");
+            build_mode = true;
+            salvage_mode = false;
+            build_room_type = 2;
+        } else {
+            console.log("not enough resources to build lab");
+        }
     }
 
     if (build_room_3.mouse.presses()) {
-        build_mode = true;
-        salvage_mode = false;
-        build_room_type = 3;
+        if (bunker_s_cost <= base.scraps && bunker_c_cost <= base.caps) {
+            console.log("ready to build bunker");
+            build_mode = true;
+            salvage_mode = false;
+            build_room_type = 3;
+        } else {
+            console.log("not enough resources to build bunker");
+        }
     }
 
     if (
@@ -51,11 +67,6 @@ function bind_game_button_events() {
         build_mode = false;
         salvage_mode = false;
     }
-
-    // if () {
-    //     build_mode = false;
-    //     salvage_mode = false;
-    // }
 
     if (salvage_button.mouse.presses()) {
         if (salvage_mode) {
@@ -98,7 +109,7 @@ function dropdown_build_buttons() {
 
     if (tray_opened) {
         build_buttons_bg.h = lerp(build_buttons_bg.h, tray_height, 0.1); // Grow background
-        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 1.8, 0.1); // Grow background
+        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 2, 0.1); // Grow background
     } else {
         build_buttons_bg.h = lerp(build_buttons_bg.h, 1, 0.1); // Shrink background
         build_buttons_bg.y = lerp(build_buttons_bg.y, 520, 0.1); // Shrink background
@@ -111,11 +122,12 @@ function dropdown_build_buttons() {
         });
     }
 
-    if (build_buttons_bg.h > tray_height -10) {
-        info_panel.visible = true;
-    } else {
-        info_panel.visible = false;
-    }
+
+        // info_panel.visible = true;
+    // } else {
+        // info_panel.visible = false;
+        // console.log('no');
+    // }
 }
 
 function bind_menu_button_events() {

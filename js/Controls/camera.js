@@ -14,7 +14,7 @@ function enable_scrolling() {
         if (initial_x === null) {
             initial_x = mouse.x;
         }
-        
+
         // calculate scroll speed based on mouse_distance
         let mouse_distance = mouse.x - initial_x;
         let scroll_speed = map(Math.abs(mouse_distance), 0, 300, min_scroll_speed, max_scroll_speed);

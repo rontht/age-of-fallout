@@ -42,5 +42,4 @@ function spawn_sprites() {
 
     enemy_bases = new Group();
     
-
 }
