@@ -26,7 +26,6 @@ class Factory {
         object.h = 10;
         object.color = 'black';
         object.collider = 's';
-        object.type = 'ENV';
         return object;
     }
 
@@ -57,7 +56,6 @@ class Factory {
             text('F4', -190, 165);
         }
         object.collider = 's';
-        object.type = 'ENV';
 
         object.caps = 100;
         object.scraps = 1000;
@@ -145,7 +143,6 @@ class Factory {
         }
         object.room_type = 0;
         object.collider = 's';
-        object.type = 'ROM';
 
         return object;
     }
@@ -156,7 +153,6 @@ class Factory {
         object.h = 100;
         object.color = 'red';
         object.collider = 's';
-        object.type = 'DOR';
         // object.debug= true;
         return object;
     }
@@ -169,7 +165,6 @@ class Factory {
         object.immovable = true;
         object.rotationLock = true;
         object.friction = 0;
-        object.type = 'UNT';
         // object.debug= true;
         return object;
     }
@@ -185,7 +180,6 @@ class Factory {
         object.color = "gray";
         object.collider = 'n';
         object.visible = visible;
-        object.type = 'GUI';
         return object;
     }
 
@@ -216,7 +210,6 @@ class Factory {
         object.color = "gray";
         object.collider = 'n';
         object.visible = visible;
-        object.type = 'GUI';
         return object;
     }
 

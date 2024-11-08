@@ -18,7 +18,6 @@ function bind_game_button_events() {
         unit.remove();
         game_buttons.remove();
         game_menu_buttons.remove();
-        info_panel.remove();
     }
 
     if (game_config_button.mouse.presses()) {
