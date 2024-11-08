@@ -1,5 +1,5 @@
 let trayY = 500;
-let tray_height = 360;
+let tray_height = 330;
 let tray_target = 560;
 
 function spawn_game_buttons() {
@@ -12,9 +12,7 @@ function spawn_game_buttons() {
     // should make this into factory _______________________________
     game_buttons = new Group();
 
-
-
-    build_buttons_bg = factory.createBackground(700 + buttons_x, 500, 500, 1, true);
+    build_buttons_bg = factory.createBackground2(700 + buttons_x, 500, 500, 1, true);
     game_buttons.add(build_buttons_bg);
     
     build_room_1 = new Sprite();
@@ -45,8 +43,6 @@ function spawn_game_buttons() {
     apply_button_style(salvage_button, 900 + buttons_x, 500, 100, 50, "Salvage");
 
 
-    info_panel = factory.createInfo();
-    // game_buttons.add(info);
 
 
 
