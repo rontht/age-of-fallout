@@ -1,3 +1,7 @@
+let song;
+let isSongStarted = false;  
+let songDuration = 0;  
+
 class Factory {
     constructor() {
 
@@ -14,6 +18,7 @@ class Factory {
         this.build_icon = loadImage("assets/images/icons/build.png");
         this.cap = loadImage("assets/images/icons/cap.png");
         this.scrap = loadImage("assets/images/icons/scrap.png");
+        song = loadSound('assets/images/backgrounds/morganarides.mp3');
 
         // this.unit_idle_ani = loadAni("assets/images/units/idle/idle.png", {
         //     width: 32, height: 45, frames: 4
@@ -477,7 +482,6 @@ class Factory {
             fill('red');
         }
     }
-
     count_rooms(id) {
         let count = 0;
         rooms.forEach(room => {
@@ -486,5 +490,17 @@ class Factory {
             }
         });
         return count;
+    }
+}
+
+function playMusic(){
+    if (!isSongStarted) {
+        song.setVolume(0.2);
+        songDuration = song.duration();
+        song.loop();
+        isSongStarted = true;
+    } else if(song.currentTime() >= songDuration){
+        song.stop(); 
+        isSongStarted = false;
     }
 }

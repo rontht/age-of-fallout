@@ -7,6 +7,8 @@ let attack_mode = false;
 
 function bind_game_button_events() {
     if (game_quit_button.mouse.presses()) {
+        song.stop();
+        isSongStarted = false;
         current_screen = MENU;
         disable_buttons(game_buttons);
         game_setup = false;

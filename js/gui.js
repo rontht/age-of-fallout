@@ -43,6 +43,7 @@ class Menu {
     }
 
     draw() {
+        //song.loop();
         background('blue');
         image(this.menu_background, 0, 0, W, H)
         
@@ -83,6 +84,7 @@ class Game {
     }
 
     draw() {
+        playMusic();
         // spawn_enemy();
         background('#7ec1cf');
         // add button functions
