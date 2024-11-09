@@ -13,9 +13,12 @@ function apply_button_style(button, x, y, w, h, label, bg_color, font_color) {
 
         // button background
         fill(bg_color);
-        rect(hoverEffect, hoverEffect, w, h);
-
+        strokeWeight(2);
+        stroke('white');
+        rect(hoverEffect, hoverEffect, w, h, 10);
+        
         // button label
+        strokeWeight(0);
         fill(font_color);
         textSize(20);
         textAlign(CENTER, CENTER);

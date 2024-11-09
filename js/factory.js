@@ -222,13 +222,11 @@ class Factory {
         return object;
     }
 
-    
     createEnemy(){
         let object = new Sprite(x, y);
         object.w = 20;
         object.h = 50;
     }
-
 
     createBackground(x, y, w, h, visible) {
         let object = new Sprite(x, y);

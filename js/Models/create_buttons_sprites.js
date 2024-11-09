@@ -73,28 +73,28 @@ function spawn_game_buttons() {
 
 function spawn_menu_buttons() {
     // button configs
-    let button_x = W / 2;
-    let button_y = H / 2;
-    let button_width = 100;
-    let button_height = 30;
-    let button_space = 50;
+    let button_x = W / 2 - 210;
+    let button_y = H / 2 + 100;
+    let button_width = 140;
+    let button_height = 70;
+    let button_space = 150;
 
     menu_buttons = new Group();
 
     // button sprites
     play_button = new Sprite();
     menu_buttons.add(play_button);
-    apply_button_style(play_button, button_x, button_y + (button_space * 0), button_width, button_height, "Play", "gray", "black");
+    apply_button_style(play_button, button_x + (button_space * 0), button_y, button_width, button_height, "Play", "#39180f", "white");
 
     deck_button = new Sprite();
     menu_buttons.add(deck_button);
-    apply_button_style(deck_button, button_x, button_y + (button_space * 1), button_width, button_height, "Deck", "gray", "black");
+    apply_button_style(deck_button, button_x + (button_space * 1), button_y, button_width, button_height, "Deck", "#39180f", "white");
 
     config_button = new Sprite();
     menu_buttons.add(config_button);
-    apply_button_style(config_button, button_x, button_y + (button_space * 2), button_width, button_height, "Config", "gray", "black");
+    apply_button_style(config_button, button_x + (button_space * 2), button_y, button_width, button_height, "Config", "#39180f", "white");
 
     exit_button = new Sprite();
     menu_buttons.add(exit_button);
-    apply_button_style(exit_button, button_x, button_y + (button_space * 3), button_width, button_height, "Exit", "gray", "black");
+    apply_button_style(exit_button, button_x + (button_space * 3), button_y, button_width, button_height, "Exit", "#39180f", "white");
 }

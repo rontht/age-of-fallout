@@ -17,7 +17,7 @@ const GAME = 2;
 const CONFIG = 3;
 
 // first screen state
-let current_screen = GAME;
+let current_screen = MENU;
 
 // check if game is already setup or not
 let game_setup = false;

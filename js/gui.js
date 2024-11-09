@@ -33,7 +33,9 @@ class Menu {
     }
 
     preload() {
+        this.menu_background = loadImage("assets/images/backgrounds/menu.png");
 
+        this.title_font = loadFont("assets/fonts/rubber_biscuit.TTF");
     }
 
     setup() {
@@ -42,12 +44,21 @@ class Menu {
 
     draw() {
         background('blue');
-
+        image(this.menu_background, 0, 0, W, H)
+        
         // menu text
-        textSize(30);
+        textFont(this.title_font);
+        textAlign(CENTER);
+        stroke('#39180f');
+        strokeWeight(10);
+        textSize(100);
         fill('white');
-        text('Main Menu', 30, 50);
-
+        text('Age of Fallout', W/2, H/2 - 200);
+        textAlign(LEFT);
+        textFont('Courier New');
+        stroke('black');
+        strokeWeight(0);
+        
         // add button functions
         enable_buttons(menu_buttons);
         bind_menu_button_events();
