@@ -7,6 +7,8 @@ let lab_s_cost = 200;
 let bunker_c_cost = 50;
 let bunker_s_cost = 50;
 
+let salvage_percentage = 0.5;
+
 function modifying_rooms() {
     for (let room of rooms) {
         // Building new rooms
@@ -23,6 +25,7 @@ function modifying_rooms() {
         if (salvage_mode) {
             if (room.mouse.presses()) {
                 if (room.room_type != 0) {
+                    salvage_room(room.room_type, base);
                     room.room_type = 0;
                     salvage_mode = false;
                 }
@@ -41,7 +44,6 @@ function build_room(room, base) {
     room.room_type = build_room_type;
     switch (build_room_type) {
         case 0:
-
             break;
         case 1:
             base.caps -= armory_c_cost;
@@ -55,6 +57,25 @@ function build_room(room, base) {
             base.caps -= bunker_c_cost;
             base.scraps -= bunker_s_cost;
 
+            break;
+    }
+}
+
+function salvage_room(build_room_type, base) {
+    switch (build_room_type) {
+        case 0:
+            break;
+        case 1:
+            base.caps += armory_c_cost * salvage_percentage;
+            base.scraps += armory_s_cost * salvage_percentage;
+            break;
+        case 2:
+            base.caps += lab_c_cost * salvage_percentage;
+            base.scraps += lab_s_cost * salvage_percentage;
+            break;
+        case 3:
+            base.caps += bunker_c_cost * salvage_percentage;
+            base.scraps += bunker_s_cost * salvage_percentage;
             break;
     }
 }

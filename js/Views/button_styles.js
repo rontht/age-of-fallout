@@ -1,4 +1,4 @@
-function apply_button_style(button, x, y, w, h, label) {
+function apply_button_style(button, x, y, w, h, label, bg_color, font_color) {
     button.x = x;
     button.y = y;
     button.w = w;
@@ -12,11 +12,11 @@ function apply_button_style(button, x, y, w, h, label) {
         }
 
         // button background
-        fill("gray");
+        fill(bg_color);
         rect(hoverEffect, hoverEffect, w, h);
 
         // button label
-        fill("dark");
+        fill(font_color);
         textSize(20);
         textAlign(CENTER, CENTER);
         text(label, hoverEffect, hoverEffect);

@@ -60,7 +60,8 @@ class Game {
     }
 
     preload() {
-
+        this.sky_bg = loadImage("assets/images/backgrounds/sky.png");
+        this.ground_bg = loadImage("assets/images/backgrounds/ground.png");
     }
 
     setup() {
@@ -71,68 +72,45 @@ class Game {
     }
 
     draw() {
-        spawn_enemy();
+        // spawn_enemy();
         background('#7ec1cf');
         // add button functions
         enable_buttons(game_buttons);
         enable_buttons(game_menu_buttons);
         bind_game_button_events();
 
+        image(this.sky_bg, 0, 0, 3000, 445);
+        image(this.ground_bg, 0, 445, 3000, 450);
+
         // Controls
         movement_logic(unit, ground);
         door_logic(door);
         modifying_rooms();
 
-        // test rect for scrolling
-        fill("red");
-        rect(0, 50, 1000, 10);
-        fill("yellow");
-        rect(1000, 50, 1000, 10);
-        fill("green");
-        rect(2000, 50, 1000, 10);
-
-        textSize(12);
-        fill('black');
-        text("Caps: " + base.caps, 10, 150 -20);
-        text("Scraps: " + base.scraps, 10, 150);
-        text("Empty: " + this.count_rooms(0), 10, 150 + 20);
-        text("Armory: " + this.count_rooms(1), 10, 150 + 40);
-        text("Lab: " + this.count_rooms(2), 10, 150 + 60);
-        text("Bunker: " + this.count_rooms(3), 10, 150 + 80);
-
         // Update and draw sprites based on the adjusted camera position
         apply_scrolling_to_sprites(ground);
         apply_scrolling_to_sprites(door);
         apply_scrolling_to_sprites(wall);
+        apply_scrolling_to_sprites(entrance);
         apply_scrolling_to_sprites(unit);
         apply_scrolling_to_sprites(base);
-
 
         for (let base of enemy_bases) {
             apply_scrolling_to_sprites(base);
         }
 
-        //apply_scrolling_to_sprites(base2);
-        //apply_scrolling_to_sprites(door2);
-
-        for (let button of game_buttons) {
-            apply_scrolling_to_sprites(button);
-        }
-
         for (let room of rooms) {
             apply_scrolling_to_sprites(room);
         }
+
+        // for testing
+        if(door.mouse.presses()) {
+            base.current_hp -= 50;
+        }
     }
 
-    count_rooms(id) {
-        let count = 0;
-        rooms.forEach(room => {
-            if (room.room_type === id) {
-                count++;
-            }
-        });
-        return count;
-    }
+
+
 }
 
 class Config {

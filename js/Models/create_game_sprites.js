@@ -4,7 +4,6 @@ let d_enemy_count = 0;
 let enemy_limiter = 0;
 let initial_position = 1000;
 
-
 function spawn_sprites() {
     // Ground
     ground = factory.createGround();
@@ -13,11 +12,13 @@ function spawn_sprites() {
     door = factory.createDoor(430, 400);
     //door2 = factory.createDoor(1500, 400);
     
-    wall = factory.createDoor(14, 400);
+    wall = factory.createBackWall(14, 400);
 
     // Base
     base = factory.createBase();
     //base2 = factory.createBase2();
+
+    entrance = factory.createEntrance();
 
     // Rooms
     rooms = new Group();

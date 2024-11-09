@@ -8,6 +8,8 @@ class Factory {
         this.lab = loadImage("assets/images/rooms/lab.png");
         this.bunker = loadImage("assets/images/rooms/bunker.png");
         this.wall = loadImage("assets/images/rooms/wall.png");
+        this.entrance = loadImage("assets/images/rooms/entrance.png");
+        this.vault_door = loadImage("assets/images/rooms/vault_door.png");
         this.salvage_icon = loadImage("assets/images/icons/salvage.png");
         this.build_icon = loadImage("assets/images/icons/build.png");
     }
@@ -24,7 +26,8 @@ class Factory {
         let object = new Sprite(W / 2 + 420, 446);
         object.w = 10000;
         object.h = 10;
-        object.color = 'black';
+        object.color = '#3f1f15';
+        object.stroke = '#3f1f15';
         object.collider = 's';
         return object;
     }
@@ -57,9 +60,22 @@ class Factory {
         }
         object.collider = 's';
 
+        // Stats
+        object.max_hp = 500;
+        object.current_hp = 500;
         object.caps = 100;
         object.scraps = 1000;
 
+        return object;
+    }
+
+    createEntrance() {
+        let object = new Sprite(220, 400);
+        object.draw = () => {
+            image(this.entrance, 0, 0, 400, 90);
+        }
+        object.layer = 100;
+        object.collider = 'n';
         return object;
     }
 
@@ -149,6 +165,19 @@ class Factory {
 
     createDoor(x, y) {
         let object = new Sprite(x, y);
+        object.w = 20;
+        object.h = 100;
+        object.draw = () => {
+            image(this.vault_door, 0, 0, 20, 110);
+        }
+        object.color = 'red';
+        object.collider = 's';
+        // object.debug= true;
+        return object;
+    }
+
+    createBackWall(x, y) {
+        let object = new Sprite(x, y);
         object.w = 10;
         object.h = 100;
         object.color = 'red';
@@ -165,12 +194,9 @@ class Factory {
         object.immovable = true;
         object.rotationLock = true;
         object.friction = 0;
+        object.layer = 1;
         // object.debug= true;
         return object;
-    }
-
-    createGarage() {
-
     }
 
     
@@ -185,18 +211,18 @@ class Factory {
         let object = new Sprite(x, y);
         object.w = w;
         object.h = h;
-        object.color = "gray";
+        object.color = "#be6021";
         object.collider = 'n';
         object.visible = visible;
         return object;
     }
 
-    createBackground2(x, y, w, h, visible) {
+    createBuildInfo(x, y, w, h, visible) {
         let object = new Sprite(x, y);
         object.w = w;
         object.h = h;
         object.draw = () => {
-            fill(0, 255, 0, 100);
+            fill('#be6021');
             rect(0, -5, object.w, object.h);
 
             if (build_buttons_bg.h > tray_height -50) {
@@ -221,7 +247,65 @@ class Factory {
                 text('Scraps cost: ' + 100, -180, -85 + 210);
             }
         }
-        object.color = "gray";
+        object.color = "#39180f";
+        object.collider = 'n';
+        object.visible = visible;
+        return object;
+    }
+
+    createInfoUI(x, y, w, h, visible) {
+        let object = new Sprite(x, y);
+        object.w = w;
+        object.h = h;
+        object.draw = () => {
+            stroke('#9f6b61');
+            strokeWeight(5);
+            fill('#2d140f');
+            rect(0, -5, object.w, object.h, 10);
+            line(45, -object.h/2 -5, 45, object.h/2 - 5);
+            
+            // Resource and other stats
+
+            // Hit Point display
+            textSize(12);
+            strokeWeight(0);
+            fill('white');
+            text("Door HP: " + base.current_hp + "/" + base.max_hp, 90, -150);
+            rectMode(CORNER);
+            let bar_width = 335;
+            let percentage = base.current_hp/base.max_hp
+            let hp = percentage * bar_width;
+            if (percentage*100 < 70 && percentage*100 >= 40) {
+                fill('yellow')
+            } else if (percentage*100 < 40) {
+                fill('red');
+            } else {
+                fill('green');
+            }
+            rect(90, -140, hp, 9);
+
+            // Tips display
+            fill('white');
+            textSize(20);
+            text("Tips", -450, -90);
+            textSize(12);
+            text('- use "Q" and "E" OR middle-mouse button to scroll.', -450, -60);
+            text('- tip 2', -450, -30);
+            text('- tip 3', -450, 0);
+
+
+            // Caps display
+            textSize(12);
+            fill('white');
+            text("Caps: " + base.caps, 100, -20);
+            text("Scraps: " + base.scraps, 100, 0);
+            text("Empty: " + this.count_rooms(0), 100, 20);
+            text("Armory: " + this.count_rooms(1), 100, 40);
+            text("Lab: " + this.count_rooms(2), 100, 60);
+            text("Bunker: " + this.count_rooms(3), 100, 80);
+            fill('black');
+        }
+        object.color = "#2d140f";
         object.collider = 'n';
         object.visible = visible;
         return object;
@@ -354,9 +438,19 @@ class Factory {
 
     change_colors(cost, resource) {
         if (cost <= resource) {
-            fill('black');
+            fill('white');
         } else {
             fill('red');
         }
+    }
+
+    count_rooms(id) {
+        let count = 0;
+        rooms.forEach(room => {
+            if (room.room_type === id) {
+                count++;
+            }
+        });
+        return count;
     }
 }

@@ -1,4 +1,4 @@
-let tray_opened = true;
+let tray_opened = false;
 let tray_speed = 8;
 
 function bind_game_button_events() {
@@ -18,6 +18,8 @@ function bind_game_button_events() {
         unit.remove();
         game_buttons.remove();
         game_menu_buttons.remove();
+        entrance.remove();
+        enemy_bases.remove();
     }
 
     if (game_config_button.mouse.presses()) {
@@ -108,7 +110,7 @@ function dropdown_build_buttons() {
 
     if (tray_opened) {
         build_buttons_bg.h = lerp(build_buttons_bg.h, tray_height, 0.1); // Grow background
-        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 2, 0.1); // Grow background
+        build_buttons_bg.y = lerp(build_buttons_bg.y, tray_height * 2.2, 0.1); // Grow background
     } else {
         build_buttons_bg.h = lerp(build_buttons_bg.h, 1, 0.1); // Shrink background
         build_buttons_bg.y = lerp(build_buttons_bg.y, 520, 0.1); // Shrink background
