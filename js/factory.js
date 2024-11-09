@@ -12,6 +12,20 @@ class Factory {
         this.vault_door = loadImage("assets/images/rooms/vault_door.png");
         this.salvage_icon = loadImage("assets/images/icons/salvage.png");
         this.build_icon = loadImage("assets/images/icons/build.png");
+        this.cap = loadImage("assets/images/icons/cap.png");
+        this.scrap = loadImage("assets/images/icons/scrap.png");
+
+        // this.unit_idle_ani = loadAni("assets/images/units/idle/idle.png", {
+        //     width: 32, height: 45, frames: 4
+        // });
+        // this.unit_walk_ani = loadAni("assets/images/units/walk/walk.png", {
+        //     width: 32, height: 45, frames: 6
+        // });
+        this.unit_idle_ani = loadAnimation("assets/images/units/idle/idle_1.png", 4);
+        this.unit_walk_ani = loadAnimation("assets/images/units/walk/walk_1.png", 6);
+
+        this.unit_idle_ani.frameDelay = 10;
+        this.unit_walk_ani.frameDelay = 6;
     }
 
     setup() {
@@ -188,13 +202,16 @@ class Factory {
 
     createHero(x, y) {
         let object = new Sprite(x, y);
-        object.w = 20;
-        object.h = 50;
+        object.w = 70;
+        object.h = 100;
         object.collider = 'd';
         object.immovable = true;
+        object.addAni('walk', this.unit_walk_ani);
+        object.addAni('idle', this.unit_idle_ani);
         object.rotationLock = true;
         object.friction = 0;
         object.layer = 1;
+        object.scale = 0.5;
         // object.debug= true;
         return object;
     }
@@ -211,6 +228,7 @@ class Factory {
         let object = new Sprite(x, y);
         object.w = w;
         object.h = h;
+        object.strokeWeight = 0;
         object.color = "#be6021";
         object.collider = 'n';
         object.visible = visible;
@@ -229,22 +247,28 @@ class Factory {
 
                 textSize(15);
                 this.change_colors(armory_c_cost, base.caps);
-                text('Caps cost: ' + armory_c_cost, -180, -105);
+                text('Caps cost: ' + armory_c_cost, -150, -105);
                 this.change_colors(armory_s_cost, base.scraps);
-                text('Scraps cost: ' + armory_s_cost, -180, -85);
+                text('Scraps cost: ' + armory_s_cost, -150, -85);
                 
                 this.change_colors(lab_c_cost, base.caps);
-                text('Caps cost: ' + lab_c_cost, -180, -105 + 70);
+                text('Caps cost: ' + lab_c_cost, -150, -105 + 70);
                 this.change_colors(lab_s_cost, base.scraps);
-                text('Scraps cost: ' + lab_s_cost, -180, -85 + 70);
+                text('Scraps cost: ' + lab_s_cost, -150, -85 + 70);
                 
                 this.change_colors(bunker_c_cost, base.caps);
-                text('Caps cost: ' + bunker_c_cost, -180, -105 + 140);
+                text('Caps cost: ' + bunker_c_cost, -150, -105 + 140);
                 this.change_colors(bunker_s_cost, base.scraps);
-                text('Scraps cost: ' + bunker_s_cost, -180, -85 + 140);
+                text('Scraps cost: ' + bunker_s_cost, -150, -85 + 140);
     
-                text('Caps cost: ' + 20, -180, -105 + 210);
-                text('Scraps cost: ' + 100, -180, -85 + 210);
+                text('Caps cost: ' + 20, -150, -105 + 210);
+                text('Scraps cost: ' + 100, -150, -85 + 210);
+
+                textSize(25);
+                fill('white');
+                text(this.count_rooms(1), -180, -95);
+                text(this.count_rooms(2), -180, -95 + 70);
+                text(this.count_rooms(3), -180, -95 + 140);
             }
         }
         object.color = "#39180f";
@@ -270,14 +294,14 @@ class Factory {
             textSize(12);
             strokeWeight(0);
             fill('white');
-            text("Door HP: " + base.current_hp + "/" + base.max_hp, 90, -150);
+            text("Vault Door HP: " + base.current_hp + "/" + base.max_hp, 90, -150);
             rectMode(CORNER);
             let bar_width = 335;
             let percentage = base.current_hp/base.max_hp
             let hp = percentage * bar_width;
-            if (percentage*100 < 70 && percentage*100 >= 40) {
+            if (percentage*100 < 70 && percentage*100 >= 30) {
                 fill('yellow')
-            } else if (percentage*100 < 40) {
+            } else if (percentage*100 < 30) {
                 fill('red');
             } else {
                 fill('green');
@@ -290,20 +314,26 @@ class Factory {
             text("Tips", -450, -90);
             textSize(12);
             text('- use "Q" and "E" OR middle-mouse button to scroll.', -450, -60);
-            text('- tip 2', -450, -30);
+            text('- press right mouse button to cancel build or salvage actions.', -450, -30);
             text('- tip 3', -450, 0);
 
 
             // Caps display
-            textSize(12);
+            fill('#be6021');
+            rect(100, -110, 150, 50, 10);
+            rect(265, -110, 150, 50, 10);
+            rect(140, -120, 70, 25, 10);
+            rect(305, -120, 70, 25, 10);
+            image(this.cap, 125, -85, 25, 25);
+            image(this.scrap, 290, -85, 33, 30);
+            textSize(18);
             fill('white');
-            text("Caps: " + base.caps, 100, -20);
-            text("Scraps: " + base.scraps, 100, 0);
-            text("Empty: " + this.count_rooms(0), 100, 20);
-            text("Armory: " + this.count_rooms(1), 100, 40);
-            text("Lab: " + this.count_rooms(2), 100, 60);
-            text("Bunker: " + this.count_rooms(3), 100, 80);
-            fill('black');
+            textAlign(CENTER);
+            text(base.caps, 190, -80);
+            text(base.scraps, 350, -80);
+            textSize(13);
+            text("Caps", 175, -108);
+            text("Scraps", 340, -108);
         }
         object.color = "#2d140f";
         object.collider = 'n';

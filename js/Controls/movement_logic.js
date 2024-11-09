@@ -1,23 +1,36 @@
-function movement_logic(unit, ground) {
-    // move on a and d key presses
-    if (kb.pressing('a')) {
-        unit.vel.x -= 0.5;
-    } else if (kb.pressing('d')) {
-        unit.vel.x += 0.5;
+// function movement_logic(unit, ground) {
+
+//     let on_ground = unit.colliding(ground);
+
+//     // move on a and d key presses
+//     if (kb.pressing('a')) {
+//         unit.x -= 2;
+//         unit.mirror.x = true;
+//         unit.changeAni('walk');
+//     } else if (kb.pressing('d')) {
+//         unit.x += 2;
+//         unit.mirror.x = false;
+//         unit.changeAni('walk');
+//     } else {
+//         unit.changeAni('idle');
+//     }
+
+//     unit.speed = 0;
+// }
+
+function movement_logic(unit) {
+    if (attack_mode) {
+        unit.x += 2;
+        unit.changeAni('walk');
+    } else {
+        unit.changeAni('idle');
     }
 
-    // jump on w
-    if (kb.presses('w') && unit.colliding(ground)) { // Assuming ground at y = height - 50
-        unit.vel.y = -8;
-    }
-
-    // damping to create smooth stop
-    unit.vel.x *= 0.9;
-    unit.vel.y *= 0.9;
+    unit.speed = 0;
 }
 
-function automated_enemy_movement(){
-    
+function automated_enemy_movement() {
+
 }
 
 

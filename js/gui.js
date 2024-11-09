@@ -83,7 +83,7 @@ class Game {
         image(this.ground_bg, 0, 445, 3000, 450);
 
         // Controls
-        movement_logic(unit, ground);
+        // movement_logic(unit, ground);
         door_logic(door);
         modifying_rooms();
 
@@ -92,8 +92,12 @@ class Game {
         apply_scrolling_to_sprites(door);
         apply_scrolling_to_sprites(wall);
         apply_scrolling_to_sprites(entrance);
-        apply_scrolling_to_sprites(unit);
         apply_scrolling_to_sprites(base);
+        
+        for (let unit of units) {
+            apply_scrolling_to_sprites(unit);
+            movement_logic(unit);
+        }
 
         for (let base of enemy_bases) {
             apply_scrolling_to_sprites(base);

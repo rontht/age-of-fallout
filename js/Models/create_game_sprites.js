@@ -44,8 +44,8 @@ function spawn_sprites() {
     rooms.push(factory.createRoom(370, 795));
 
     // Units
-    // units = new Group();
-    unit = factory.createHero();
+    units = new Group();
+    // unit = factory.createHero(W/2, H/2);
 
     ///////////
     // Enemy //

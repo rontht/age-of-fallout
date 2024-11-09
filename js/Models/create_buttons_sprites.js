@@ -44,8 +44,14 @@ function spawn_game_buttons() {
     salvage_button = new Sprite();
     game_buttons.add(salvage_button);
     apply_button_style(salvage_button, 900 + buttons_x, 500, 100, 50, "Salvage", "#3f1f15", "white");
-
-
+    
+    create_new_unit_button = new Sprite();
+    game_buttons.add(create_new_unit_button);
+    apply_button_style(create_new_unit_button, 1100, 775, 100, 50, "Create", "#3f1f15", "white");
+    
+    attack_button = new Sprite();
+    game_buttons.add(attack_button);
+    apply_button_style(attack_button, 1300, 775, 100, 50, "Attack", "#3f1f15", "white");
 
 
 

@@ -5,9 +5,9 @@ let initial_x = null;
 
 function enable_scrolling() {
     if (kb.pressing('e')) {
-        cameraX += min_scroll_speed;
+        cameraX += max_scroll_speed;
     } else if (kb.pressing('q') && cameraX > 0) {
-        cameraX -= min_scroll_speed;
+        cameraX -= max_scroll_speed;
     }
 
     if (mouse.pressing('center')) {

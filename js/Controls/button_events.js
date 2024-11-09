@@ -1,6 +1,10 @@
 let tray_opened = false;
 let tray_speed = 8;
 
+let unit_count = 0;
+
+let attack_mode = false;
+
 function bind_game_button_events() {
     if (game_quit_button.mouse.presses()) {
         current_screen = MENU;
@@ -15,7 +19,7 @@ function bind_game_button_events() {
         door.remove();
         base.remove();
         rooms.remove();
-        unit.remove();
+        units.remove();
         game_buttons.remove();
         game_menu_buttons.remove();
         entrance.remove();
@@ -76,6 +80,25 @@ function bind_game_button_events() {
         } else if (!salvage_mode) {
             build_mode = false;
             salvage_mode = true;
+        }
+    }
+
+    if (create_new_unit_button.mouse.presses()) {
+        if (unit_count < 5) {
+            unit_count += 1;
+            units.push(factory.createHero(60 + 50 * unit_count, H/2));
+        }
+    }
+
+    console.log(unit_count);
+
+    if (attack_button.mouse.presses()) {
+        if (attack_mode) {
+            attack_mode = false;
+            console.log(attack_mode);
+        } else {
+            attack_mode = true;
+            console.log(attack_mode);
         }
     }
 
