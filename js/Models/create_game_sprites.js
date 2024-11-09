@@ -52,7 +52,7 @@ function spawn_sprites() {
     ///////////
 
     enemy_bases = new Group();
-    enemy_bases.push(factory.createEnemySpawn(1000, 400));
+    // enemy_bases.push(factory.createEnemySpawn(1000, 400));
 }
 
 function spawn_enemy() {

@@ -19,11 +19,22 @@
 // }
 
 function movement_logic(unit) {
-    if (attack_mode) {
-        unit.x += 2;
-        unit.changeAni('walk');
-    } else {
-        unit.changeAni('idle');
+    if (unit.team) {
+        if (attack_mode) {
+            unit.x += 2;
+            unit.changeAni('walk');
+        } else {
+            unit.changeAni('idle');
+        }
+    } else if (!unit.team) {
+        if (attack_mode) {
+            unit.x -= 2;
+            unit.mirror.x = true;
+            unit.changeAni('walk');
+        } else {
+            unit.mirror.x = true;
+            unit.changeAni('idle');
+        }
     }
 
     unit.speed = 0;

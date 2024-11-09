@@ -200,7 +200,7 @@ class Factory {
         return object;
     }
 
-    createHero(x, y) {
+    createUnit(x, y, team, hp, damage) {
         let object = new Sprite(x, y);
         object.w = 70;
         object.h = 100;
@@ -213,6 +213,12 @@ class Factory {
         object.layer = 1;
         object.scale = 0.5;
         // object.debug= true;
+
+        // Stats
+        object.team = team;
+        object.hp = hp;
+        object.damage = damage;
+
         return object;
     }
 

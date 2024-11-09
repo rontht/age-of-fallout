@@ -86,19 +86,22 @@ function bind_game_button_events() {
     if (create_new_unit_button.mouse.presses()) {
         if (unit_count < 5) {
             unit_count += 1;
-            units.push(factory.createHero(60 + 50 * unit_count, H/2));
+            units.push(factory.createUnit(60 + 50 * unit_count, H/2, true, 100, 10));
         }
     }
 
-    console.log(unit_count);
+    if (kb.presses('space')) {
+        console.log('yes');
+        units.push(factory.createUnit(2000, H/2, false, 100, 10));
+    }
 
     if (attack_button.mouse.presses()) {
         if (attack_mode) {
             attack_mode = false;
-            console.log(attack_mode);
+            // console.log(attack_mode);
         } else {
             attack_mode = true;
-            console.log(attack_mode);
+            // console.log(attack_mode);
         }
     }
 

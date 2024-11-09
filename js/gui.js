@@ -84,7 +84,7 @@ class Game {
 
         // Controls
         // movement_logic(unit, ground);
-        door_logic(door);
+        // door_logic(door);
         modifying_rooms();
 
         // Update and draw sprites based on the adjusted camera position
@@ -97,6 +97,10 @@ class Game {
         for (let unit of units) {
             apply_scrolling_to_sprites(unit);
             movement_logic(unit);
+
+            if (unit.team) {
+                unit.overlaps(door);
+            }
         }
 
         for (let base of enemy_bases) {
