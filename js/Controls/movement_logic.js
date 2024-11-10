@@ -20,20 +20,25 @@
 
 function movement_logic(unit) {
     if (unit.team) {
-        if (attack_mode) {
+        if (unit.mode === "WALK") {
             unit.x += 2;
             unit.changeAni('walk');
-        } else {
+        } else if (unit.mode === "IDLE") {
             unit.changeAni('idle');
+        } else if (unit.mode === "ATTACK") {
+            unit.changeAni('attack');
         }
     } else if (!unit.team) {
-        if (attack_mode) {
-            unit.x -= 2;
+        if (unit.mode === "WALK") {
             unit.mirror.x = true;
+            unit.x -= 2;
             unit.changeAni('walk');
-        } else {
+        } else if (unit.mode === "IDLE") {
             unit.mirror.x = true;
             unit.changeAni('idle');
+        } else if (unit.mode === "ATTACK") {
+            unit.mirror.x = true;
+            unit.changeAni('attack');
         }
     }
 

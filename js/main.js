@@ -35,6 +35,7 @@ function preload() {
     loading.preload();
     config.preload();
     factory.preload();
+    song = loadSound('assets/images/backgrounds/morganarides.mp3');
 }
 
 function setup() {
@@ -53,9 +54,12 @@ function draw() {
             loading.draw();
             break;
         case MENU:
+            song.stop();
+            isSongStarted = false;
             menu.draw();
             break;
         case GAME:
+            playMusic();
             draw_game();
             break;
         case CONFIG:

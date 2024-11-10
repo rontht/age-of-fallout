@@ -1,7 +1,3 @@
-let song;
-let isSongStarted = false;  
-let songDuration = 0;  
-
 class Factory {
     constructor() {
 
@@ -18,7 +14,7 @@ class Factory {
         this.build_icon = loadImage("assets/images/icons/build.png");
         this.cap = loadImage("assets/images/icons/cap.png");
         this.scrap = loadImage("assets/images/icons/scrap.png");
-        song = loadSound('assets/images/backgrounds/morganarides.mp3');
+
 
         // this.unit_idle_ani = loadAni("assets/images/units/idle/idle.png", {
         //     width: 32, height: 45, frames: 4
@@ -28,9 +24,19 @@ class Factory {
         // });
         this.unit_idle_ani = loadAnimation("assets/images/units/idle/idle_1.png", 4);
         this.unit_walk_ani = loadAnimation("assets/images/units/walk/walk_1.png", 6);
+        this.unit_attack_ani = loadAnimation("assets/images/units/attack/attack_1.png", 4);
+        
+        this.enemy_idle_ani = loadAnimation("assets/images/enemies/idle/idle_1.png", 4);
+        this.enemy_walk_ani = loadAnimation("assets/images/enemies/walk/walk_1.png", 6);
+        this.enemy_attack_ani = loadAnimation("assets/images/enemies/attack/attack_1.png", 4);
 
         this.unit_idle_ani.frameDelay = 10;
         this.unit_walk_ani.frameDelay = 6;
+        this.unit_attack_ani.frameDelay = 8;
+        
+        this.enemy_idle_ani.frameDelay = 10;
+        this.enemy_walk_ani.frameDelay = 6;
+        this.enemy_attack_ani.frameDelay = 8;
     }
 
     setup() {
@@ -80,8 +86,6 @@ class Factory {
         object.collider = 's';
 
         // Stats
-        object.max_hp = 500;
-        object.current_hp = 500;
         object.caps = 100;
         object.scraps = 1000;
 
@@ -192,6 +196,11 @@ class Factory {
         object.color = 'red';
         object.collider = 's';
         // object.debug= true;
+
+        //Stats
+        object.max_hp = 500;
+        object.current_hp = 500;
+
         return object;
     }
 
@@ -211,8 +220,6 @@ class Factory {
         object.h = 100;
         object.collider = 'd';
         object.immovable = true;
-        object.addAni('walk', this.unit_walk_ani);
-        object.addAni('idle', this.unit_idle_ani);
         object.rotationLock = true;
         object.friction = 0;
         object.layer = 1;
@@ -221,9 +228,24 @@ class Factory {
 
         // Stats
         object.team = team;
-        object.hp = hp;
-        object.damage = damage;
+        object.max_hp = hp;
+        object.current_hp = hp;
+        object.attack_damage = damage;
+        object.attack_speed = 1;
+        object.attack_range = 50;
+        object.last_attack = null;
+        object.mode = "WALK";
 
+        // Animation
+        if (object.team) {
+            object.addAni('walk', this.unit_walk_ani);
+            object.addAni('idle', this.unit_idle_ani);
+            object.addAni('attack', this.unit_attack_ani);
+        } else {
+            object.addAni('walk', this.enemy_walk_ani);
+            object.addAni('idle', this.enemy_idle_ani);
+            object.addAni('attack', this.enemy_attack_ani);
+        }
         return object;
     }
 
@@ -303,10 +325,10 @@ class Factory {
             textSize(12);
             strokeWeight(0);
             fill('white');
-            text("Vault Door HP: " + base.current_hp + "/" + base.max_hp, 90, -150);
+            text("Vault Door HP: " + door.current_hp + "/" + door.max_hp, 90, -150);
             rectMode(CORNER);
             let bar_width = 335;
-            let percentage = base.current_hp/base.max_hp
+            let percentage = door.current_hp/door.max_hp
             let hp = percentage * bar_width;
             if (percentage*100 < 70 && percentage*100 >= 30) {
                 fill('yellow')
@@ -490,17 +512,5 @@ class Factory {
             }
         });
         return count;
-    }
-}
-
-function playMusic(){
-    if (!isSongStarted) {
-        song.setVolume(0.2);
-        songDuration = song.duration();
-        song.loop();
-        isSongStarted = true;
-    } else if(song.currentTime() >= songDuration){
-        song.stop(); 
-        isSongStarted = false;
     }
 }

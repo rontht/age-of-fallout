@@ -3,12 +3,10 @@ let tray_speed = 8;
 
 let unit_count = 0;
 
-let attack_mode = false;
+let attack_mode = true;
 
 function bind_game_button_events() {
     if (game_quit_button.mouse.presses()) {
-        song.stop();
-        isSongStarted = false;
         current_screen = MENU;
         disable_buttons(game_buttons);
         game_setup = false;
@@ -86,26 +84,27 @@ function bind_game_button_events() {
     }
 
     if (create_new_unit_button.mouse.presses()) {
-        if (unit_count < 5) {
-            unit_count += 1;
-            units.push(factory.createUnit(60 + 50 * unit_count, H/2, true, 100, 10));
-        }
+        // if (unit_count < 5) {
+        //     unit_count += 1;
+        units.push(factory.createUnit(20, H/2, true, 100, 10));
+        // }
     }
 
+    // test enemy spawning
     if (kb.presses('space')) {
         console.log('yes');
-        units.push(factory.createUnit(2000, H/2, false, 100, 10));
+        units.push(factory.createUnit(1000, H/2, false, 100, 10));
     }
 
-    if (attack_button.mouse.presses()) {
-        if (attack_mode) {
-            attack_mode = false;
-            // console.log(attack_mode);
-        } else {
-            attack_mode = true;
-            // console.log(attack_mode);
-        }
-    }
+    // if (attack_button.mouse.presses()) {
+    //     if (attack_mode) {
+    //         attack_mode = false;
+    //         // console.log(attack_mode);
+    //     } else {
+    //         attack_mode = true;
+    //         // console.log(attack_mode);
+    //     }
+    // }
 
     dropdown_build_buttons();
 }

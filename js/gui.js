@@ -84,7 +84,6 @@ class Game {
     }
 
     draw() {
-        playMusic();
         // spawn_enemy();
         background('#7ec1cf');
         // add button functions
@@ -99,7 +98,7 @@ class Game {
         // movement_logic(unit, ground);
         // door_logic(door);
         modifying_rooms();
-
+        
         // Update and draw sprites based on the adjusted camera position
         apply_scrolling_to_sprites(ground);
         apply_scrolling_to_sprites(door);
@@ -110,6 +109,9 @@ class Game {
         for (let unit of units) {
             apply_scrolling_to_sprites(unit);
             movement_logic(unit);
+            draw_health_bar(unit);
+            attack_logic(unit, units, door);
+            death_logic(unit);
 
             if (unit.team) {
                 unit.overlaps(door);
@@ -129,8 +131,6 @@ class Game {
             base.current_hp -= 50;
         }
     }
-
-
 
 }
 
